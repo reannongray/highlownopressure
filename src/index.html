@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HighLowNoPressure - Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="weather-dashboard">
+        <!-- Left Sidebar -->
+        <aside class="weather-sidebar">
+            <div class="header-section">
+                <div class="app-title">
+                    <i class="ri-cloud-line"></i>
+                    <div class="title-text">
+                        <h3>HighLowNoPressure</h3>
+                        <p>Vibes: High. Stress: Low. Pressure: None.</p>
+                    </div>
+                </div>
+                <div class="weather-search">
+                    <i class="ri-search-2-line"></i>
+                    <input type="text" placeholder="Search location" id="location-search" />
+                </div>
+            </div>
+
+            <div class="weather-temp-card">
+                <div class="temp-info">
+                    <div class="weather-icon-container">
+                        <i class="ri-sun-line current-weather-icon"></i>
+                    </div>
+                    <div class="temp-details">
+                        <h2 class="current-temp">--°</h2>
+                        <p class="weather-desc">Waiting for data...</p>
+                        <span class="location">--</span>
+                    </div>
+                </div>
+                <div class="temp-stats">
+                    <canvas id="tempChart"></canvas>
+                </div>
+                <div class="snarky-forecast">
+                    <p>"Loading your snarky forecast..."</p>
+                </div>
+            </div>
+
+            <div class="weather-highlights">
+                <h3>Today's Highlights</h3>
+                <div class="highlight-cards">
+                    <div class="highlight-card">
+                        <div class="card-header">
+                            <i class="ri-sun-foggy-line"></i>
+                            <span>UV Index</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="uv-meter">
+                                <div class="uv-gauge">
+                                    <div class="uv-fill uv-fill-empty"></div>
+                                </div>
+                                <span class="uv-value">--</span>
+                            </div>
+                            <p class="status normal">Waiting for data</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="card-header">
+                            <i class="ri-windy-line"></i>
+                            <span>Wind Status</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="wind-status">
+                                <h2 class="wind-speed">-- mph</h2>
+                                <div class="wind-direction">
+                                    <i class="ri-compass-3-line"></i>
+                                    <span class="wind-dir-text">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-card">
+                        <div class="card-header">
+                            <i class="ri-drop-line"></i>
+                            <span>Humidity</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="humidity-meter">
+                                <div class="humidity-gauge">
+                                    <div class="humidity-fill humidity-fill-empty"></div>
+                                </div>
+                                <h2 class="humidity-value">--%</h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-card">
+                        <div class="card-header">
+                            <i class="ri-eye-line"></i>
+                            <span>Visibility</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="visibility-status">
+                                <h2 class="visibility-value">-- mi</h2>
+                                <p class="visibility-text">Waiting for data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sunrise-sunset-card">
+                <div class="card-header">
+                    <h3>Sunrise & Sunset</h3>
+                </div>
+                <div class="sun-timeline">
+                    <div class="sunrise">
+                        <i class="ri-sun-line"></i>
+                        <div class="sun-time">
+                            <p>Sunrise</p>
+                            <h4 class="sunrise-time">--:-- AM</h4>
+                        </div>
+                    </div>
+                    <div class="sunset">
+                        <i class="ri-moon-line"></i>
+                        <div class="sun-time">
+                            <p>Sunset</p>
+                            <h4 class="sunset-time">--:-- PM</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="weather-main">
+            <nav class="top-nav">
+                <div class="date-location">
+                    <h2 class="current-date">--</h2>
+                    <p class="current-time">Local time: --:-- --</p>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="ri-contrast-2-line"></i>
+                    </button>
+                    <button class="units-toggle" aria-label="Toggle temperature units">°C</button>
+                </div>
+            </nav>
+
+            <section class="forecast-section">
+                <div class="section-header">
+                    <h3>Weekly Forecast</h3>
+                    <div class="forecast-nav">
+                        <button class="active">Week</button>
+                        <button>10 Days</button>
+                    </div>
+                </div>
+
+                <div class="forecast-cards">
+                    <!-- Dynamic Forecast Cards will be inserted here -->
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                    <div class="forecast-card skeleton">
+                        <div class="forecast-day-skeleton"></div>
+                        <div class="forecast-icon-skeleton"></div>
+                        <div class="forecast-temp-skeleton"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="air-quality-section">
+                <div class="section-header">
+                    <h3>Air Quality Index</h3>
+                    <span class="aqi-badge">Waiting for data</span>
+                </div>
+                <div class="aqi-chart-container">
+                    <canvas id="aqiChart"></canvas>
+                </div>
+                <div class="aqi-metrics">
+                    <div class="aqi-metric">
+                        <h4>PM2.5</h4>
+                        <p class="aqi-value pm25-value">--</p>
+                    </div>
+                    <div class="aqi-metric">
+                        <h4>PM10</h4>
+                        <p class="aqi-value pm10-value">--</p>
+                    </div>
+                    <div class="aqi-metric">
+                        <h4>SO<sub>2</sub></h4>
+                        <p class="aqi-value so2-value">--</p>
+                    </div>
+                    <div class="aqi-metric">
+                        <h4>NO<sub>2</sub></h4>
+                        <p class="aqi-value no2-value">--</p>
+                    </div>
+                    <div class="aqi-metric">
+                        <h4>O<sub>3</sub></h4>
+                        <p class="aqi-value o3-value">--</p>
+                    </div>
+                    <div class="aqi-metric">
+                        <h4>CO</h4>
+                        <p class="aqi-value co-value">--</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hourly-forecast">
+                <h3>Today's Temperature</h3>
+                <div class="temp-timeline">
+                    <canvas id="hourlyChart"></canvas>
+                </div>
+                
+                <div class="precipitation-chance">
+                    <h3>Precipitation Chance</h3>
+                    <div class="precipitation-chart">
+                        <canvas id="precipChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="moon-phase-card">
+                <div class="section-header">
+                    <h3>Moon Phase</h3>
+                </div>
+                <div class="moon-display">
+                    <div class="moon-icon">
+                        <i class="ri-moon-fill"></i>
+                    </div>
+                    <div class="moon-info">
+                        <h4 class="moon-phase-name">Waiting for data</h4>
+                        <p class="moon-phase-desc">The Moon phase will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Loading overlay -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+        <p>Loading weather data...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
